@@ -4,7 +4,7 @@
             <!-- {{ data2.data }}
          {{ data2(name) }} -->
             <!-- {{  moo.name  }} --> 
-            <img :src="config.public.imgBaseUrl+'/'+moo.profile_path" style="max-width: 300px;"></img>
+            <img :src="config.public.imgBaseUrl+'/'+moo?.profile_path" style="max-width: 300px;"></img>
             <!-- {{ data }} -->
             <!-- <div v-for="moo in data2.data">
                 wtf
