@@ -2,17 +2,19 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
-
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
-  runtimeConfig:{
+  runtimeConfig: {
+    apiKey: '',
+    apiBaseUrl: '',
+    apiWooKey: '',
+    apiWooVal: '',
     public: {
-      wordpressUrl: 'http://80.229.31.61/wordpress/graphql'
+      imgBaseUrl: ''
     }
-  },
-  modules: ['@nuxtjs/tailwindcss'],
+  }
 })
