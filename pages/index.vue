@@ -3,7 +3,7 @@
 
 <template>
     <div>
-      <h1 class="bg-red-500">Hwerro</h1>
+      <h1 class="bg-red-500">Hwerrro</h1>
       <p>Woocommerce shop example</p>
       <p>Bollywood api</p>
       <p>Javascript focused game/ai logic etc</p>
