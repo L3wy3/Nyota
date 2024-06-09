@@ -1,7 +1,7 @@
 <script setup>
 // const url = "http://80.229.31.61/wordpress/wp-json/wc/v3/products"
 
-const url = "http://80.229.31.61/wordpress/wp-json/"
+const url = "http://nyota-woo.co.uk/wordpress/wp-json/"
 // const oauth = OAuth({
 //       consumer: {
 //           key: '',
