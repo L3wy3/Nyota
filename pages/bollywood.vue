@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 
-const list = [35742, 37233];
+const list = [35742, 37233, 35780, 78749, 6217];
 const picked = (list[(Math.floor(Math.random() * list.length))]);
 // import type {APIResponse} from "~~/types/APIResponse";
 
