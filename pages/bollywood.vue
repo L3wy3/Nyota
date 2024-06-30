@@ -12,7 +12,7 @@ const url4 =  'https://api.themoviedb.org/3/person/'+picked+'/movie_credits'
     // return `https://api.themoviedb.org/3/discover/movie?with_people=35742%7C37233`
     // return `api/movies/search?query=${searchTerm.value}`
 
-const url3 =  'https://api.themoviedb.org/3/person/'+picked+'?language=en-US'
+// const url3 =  'https://api.themoviedb.org/3/person/'+picked+'?language=en-US'
     // return "https://api.themoviedb.org/3/person/"+picked+"/movie_credits"
     // return `https://api.themoviedb.org/3/discover/movie?with_people=35742%7C37233`
     // return `api/movies/search?query=${searchTerm.value}`
@@ -29,13 +29,13 @@ const {data} = await useFetch(url5, {
             "Authorization": `Bearer ${config.apiKey}`
         }});
 
-// const url3 = 'https://api.themoviedb.org/3/person/'+picked+'?language=en-US';
-// const data2 = await useFetch(url3, {
-//         method: 'GET',
-//         headers: {
-//             "Authorization": `Bearer ${config.apiKey}`
-//         }});
-// const moo = data2.data
+const url3 = 'https://api.themoviedb.org/3/person/'+picked+'?language=en-US';
+const data2 = await useFetch(url3, {
+        method: 'GET',
+        headers: {
+            "Authorization": `Bearer ${config.apiKey}`
+        }});
+const moo = data2.data
 
 </script>
 
@@ -45,12 +45,12 @@ const {data} = await useFetch(url5, {
             <!-- {{ data2.data }}
          {{ data2(name) }} -->
             <!-- {{  moo.name  }} --> 
-            <!-- <img :src="config.public.imgBaseUrl+'/'+moo?.profile_path" style="max-width: 300px;"></img> -->
+            <img :src="config.public.imgBaseUrl+'/'+moo?.profile_path" style="max-width: 300px;"></img>
             <!-- {{ data }} -->
-            <!-- <div v-for="moo in data2.data">
+            <div v-for="moo in data2.data">
                 wtf
                 {{moo}}
-            </div> -->
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 self-center gap-x-10 gap-y-10 mb-10">
             <!-- <div v-for="actor in moo"> -->
                 <!-- <ActorCard :actor="actor"></ActorCard> -->
