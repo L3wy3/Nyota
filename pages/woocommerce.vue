@@ -64,11 +64,17 @@ const {data, error, pending} = await useFetch(url5, {
 <template>
     <div>
       <h1 class="bg-red-500">E-commerce data</h1>
-      <div v-for="moo in data2.data">
-        {{moo}}
+      <div style="    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;">
+        <div v-for="moo in data" style="background-color: red; margin: 10px; width: 200px">
+          <p>wuh</p>
+          <img :src=moo.images[0].src  style="width: 150px;"/>
+        </div>
       </div>
-      {{  data }}
-      {{ error  }}
-      {{  pending }}
+      <!-- {{  data }} -->
+      <!-- {{ error  }} -->
+      <!-- {{  pending }} -->
     </div>
 </template>
