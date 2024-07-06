@@ -22,26 +22,42 @@ function tagScrape(text) {
   padding: 20px;
 }
 .product-container {
+  background-color: #dbe2ff;
   width: 100%;
   max-width: 300px;
   position: relative;
-  border: 5px solid rgb(0, 110, 255);
-  border-radius: 5px;
+  border: 5px solid rgb(75 97 126);
+  border-radius: 11px;
   margin: 5px;
-  padding: 20px
+  padding: 10px;
+}
+.product-container h3 {
+  text-align: center;
+  font-weight: 600;
+  color: #180d64;
+}
+.product-container p span {
+  text-decoration: line-through;
 }
 .product-images {
   background-size: cover;
+  background-position: center;
   width: 100%;
   height: 150px;
+  border-radius: 5px;
 }
-.sale-price {
-  background-color: red;
+.sale-token {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(234, 255, 0);
   position: absolute;
-  top: -15px;
-  right: -15px;
-  height: 30px;
-  widows: 30px;
+  top: -30px;
+  right: -30px;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  border-radius: 50%;
 }
 </style>
 <template>
@@ -52,14 +68,15 @@ function tagScrape(text) {
     flex-wrap: wrap;
     justify-content: center;">
         <div class="product-container" v-for="moo in data">
-          <div class="product-images" :style="{'background-image': `url(${moo.images[0].src})`, 'width' : '150px', 'height' : '100px'}"></div>
-          <p>{{moo.name}}</p>
-          <p>{{ tagScrape(moo.description) }}</p>
-          <p>{{ moo.regular_price }}</p>
-          <p v-if="moo.sale_price" class="sale-price">{{ moo.sale_price }}</p>
+          <div class="product-images" :style="{'background-image': `url(${moo.images[0].src})`}"></div>
+          <h3>{{moo.name}}</h3>
+          <p>{{ tagScrape(moo.short_description) }}</p>
+          <p v-if="!moo.sale_price">{{ moo.regular_price }}</p>
+          <p v-if="moo.sale_price" class="sale-token">Sale</p>
+          <p v-if="moo.sale_price">{{ moo.sale_price }} was <span>{{ moo.regular_price }}</span></p>
         </div>
       </div>
-      <!-- {{  data }} -->
+      {{  data }}
       <!-- {{ error  }} -->
       <!-- {{  pending }} -->
     </div>
