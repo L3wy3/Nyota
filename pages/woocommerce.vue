@@ -17,7 +17,7 @@ const {data, error, pending} = await useFetch(url5, {
         // headers: {
         //     "Authorization": "Basic" "Y2tfM2QxOGE4OWU0NzA3NTU4NjBhMDcwZGRmMjcxMzg2MWZlNTQ2YTk4NDpjc18wZDhjMGVkNjhhNzQ3NTZmNjYzOTcxNjg2ZDNmZDRjMGYzZTNkZWVmIg=="
         // }
-        credentials: true,
+        credentials: True,
           auth: {
           username: 'ck_3d18a89e470755860a070ddf2713861fe546a984',
           password: 'cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef'

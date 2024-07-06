@@ -8,6 +8,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules: ['@tresjs/nuxt'],
   runtimeConfig: {
     apiKey: '',
     apiBaseUrl: '',
