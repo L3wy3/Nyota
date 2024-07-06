@@ -1,7 +1,8 @@
 <script setup>
 const config = useRuntimeConfig();
-const url5 = 'https://nyota-woo.co.uk/wordpress/wp-json/wc/v2/products?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef';
-const {data, error, pending} = await useFetch(url5, {
+const counter = 1;
+const url5 = `https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef&per_page=${counter}`;
+const {data, error, pending, refresh} = await useFetch(url5, {
         method: 'GET',
           auth: {
           username: 'ck_3d18a89e470755860a070ddf2713861fe546a984',
@@ -14,7 +15,11 @@ function tagScrape(text) {
       return text.replace(regex, "");
 }
 
-
+function ScoreIncre() {
+  counter = ref(6);
+  refresh()
+  refreshNuxtData()
+}
 </script>
 <style>
 #products-container {
@@ -67,6 +72,7 @@ function tagScrape(text) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;">
+    <button v-on:click="ScoreIncre()">Increase my Score</button>
         <div class="product-container" v-for="moo in data">
           <div class="product-images" :style="{'background-image': `url(${moo.images[0].src})`}"></div>
           <h3>{{moo.name}}</h3>
@@ -76,7 +82,7 @@ function tagScrape(text) {
           <p v-if="moo.sale_price">{{ moo.sale_price }} was <span>{{ moo.regular_price }}</span></p>
         </div>
       </div>
-      {{  data }}
+      <!-- {{ data }} -->
       <!-- {{ error  }} -->
       <!-- {{  pending }} -->
     </div>
