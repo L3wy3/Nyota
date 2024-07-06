@@ -11,13 +11,13 @@ const config = useRuntimeConfig();
 //       signature_method: 'HMAC-SHA1'
 //   });
 
-const url5 = 'https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products';
+const url5 = 'https://nyota-woo.co.uk/wordpress/wp-json/wc/v2/products?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef';
 const {data, error, pending} = await useFetch(url5, {
         method: 'GET',
         // headers: {
         //     "Authorization": "Basic" "Y2tfM2QxOGE4OWU0NzA3NTU4NjBhMDcwZGRmMjcxMzg2MWZlNTQ2YTk4NDpjc18wZDhjMGVkNjhhNzQ3NTZmNjYzOTcxNjg2ZDNmZDRjMGYzZTNkZWVmIg=="
         // }
-        credentials: True,
+        // credentials: 'include',
           auth: {
           username: 'ck_3d18a89e470755860a070ddf2713861fe546a984',
           password: 'cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef'
@@ -64,10 +64,11 @@ const {data, error, pending} = await useFetch(url5, {
 <template>
     <div>
       <h1 class="bg-red-500">E-commerce data</h1>
-      data?
+      <div v-for="moo in data2.data">
+        {{moo}}
+      </div>
       {{  data }}
       {{ error  }}
       {{  pending }}
-      data?
     </div>
 </template>
