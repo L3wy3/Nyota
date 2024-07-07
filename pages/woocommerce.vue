@@ -1,25 +1,25 @@
 <script setup>
 const config = useRuntimeConfig();
-const counter = 1;
-const url5 = `https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef&per_page=${counter}`;
-const {data, error, pending, refresh} = await useFetch(url5, {
-        method: 'GET',
-          auth: {
-          username: 'ck_3d18a89e470755860a070ddf2713861fe546a984',
-          password: 'cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef'
-        }
-      });
+let count = 100
+// let perPage = ref(count);
+let url5 = `https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef&per_page=${count}`;
+let {data, error, pending, refresh} = await useFetch(url5);
+
+// const { data, pending, error, refresh } = useFetch(`https://reqres.in/api/users?delay=1`, query: {param1: `page=${counter}`)
 
 function tagScrape(text) {
       let regex = /(<([^>]+)>)/ig;
       return text.replace(regex, "");
 }
 
-function ScoreIncre() {
-  counter = ref(6);
-  refresh()
-  refreshNuxtData()
+const loadPost = () => {
+  count += 1;
+  refresh(count)
+  // console.log("refreshing "+count)
+  console.log(count)
+  console.log(url5)
 }
+// setInterval(refreshing, 1000);
 </script>
 <style>
 #products-container {
@@ -72,7 +72,8 @@ function ScoreIncre() {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;">
-    <button v-on:click="ScoreIncre()">Increase my Score</button>
+    <button @click.prevent="loadPost">Load post</button>
+    <pre>pending: {{ pending }}</pre>
         <div class="product-container" v-for="moo in data">
           <div class="product-images" :style="{'background-image': `url(${moo.images[0].src})`}"></div>
           <h3>{{moo.name}}</h3>
