@@ -1,10 +1,16 @@
 <script setup>
 const config = useRuntimeConfig();
-const count = ref(1);
+const count = ref(9);
 const page = ref(1);
 // let perPage = ref(count);
 // const url5 = `https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef&per_page=3&page=${count}`;
-// const {data, error, pending, refresh} = await useFetch(url5);
+
+const cats = `https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products/categories/?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef`;
+// const {data2} = await useAsyncData(
+//   'test',
+//   () =>
+//     $fetch(cats, {})
+// );
 
 
 const { data, pending } = await useAsyncData(
@@ -38,6 +44,11 @@ const changePage = (dir) => {
   // console.log("refreshing "+count)
   console.log(count)
 }
+
+
+// const { data3 } = await useFetch('https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products/categories/?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef');
+
+const { data3 } = await useAsyncData('item', () => $fetch(cats))
 // setInterval(refreshing, 1000);
 </script>
 <style>
@@ -70,18 +81,44 @@ const changePage = (dir) => {
   height: 150px;
   border-radius: 5px;
 }
+
+@keyframes rotate {
+  0%   {background-image: linear-gradient(0deg, black, #0900ff);}
+  50% {background-image: linear-gradient(180deg,  #0900ff, black);}
+  100%   {background-image: linear-gradient(360deg, black, #0900ff);}
+}
 .sale-token {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(234, 255, 0);
+  justify-content: flex-end;
+  align-items: flex-start;
   position: absolute;
-  top: -30px;
-  right: -30px;
+  top: 0px;
+  right: 0px;
   height: 60px;
   width: 60px;
   text-align: center;
-  border-radius: 50%;
+  border-radius: 0 12px 0 200%;
+  z-index: 2;
+  padding: 9px;
+  /* background-image: linear-gradient(292deg, black, #0900ff); */
+  color: white;
+  font-weight: 900;
+  animation: rotate 5s infinite;
+}
+button {
+  display: block;
+  margin: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  border: 2px solid black;
+  text-transform: capitalize;
+  border-radius: 20px;
+}
+.p-butt {
+  float: left;
+}
+.n-butt {
+  float: right;
 }
 </style>
 <template>
@@ -93,13 +130,13 @@ const changePage = (dir) => {
     flex-wrap: wrap;
     justify-content: center;">
         <div style="width: 100%">
-          <button @click.prevent="loadPost(5)">5</button>
+          <!-- <button @click.prevent="loadPost(5)">5</button>
           <button @click.prevent="loadPost(10)">10</button>
           <button @click.prevent="loadPost(15)">15</button>
-          <button @click.prevent="loadPost(20)">20</button>
-          <button v-if="page > 1" @click.prevent="changePage(-1)">prev page</button>
-          <button @click.prevent="changePage(1)">next page</button>
-          {{ data.length }}
+          <button @click.prevent="loadPost(20)">20</button> -->
+          <button class="p-butt" v-if="page > 1" @click.prevent="changePage(-1)">prev page</button>
+          <button class="n-butt"@click.prevent="changePage(1)">next page</button>
+          <!-- {{ data.length }} -->
           <!-- <pre>pending: {{ pending }}</pre> -->
         </div>
         <div class="product-container" v-for="moo in data">
@@ -111,7 +148,7 @@ const changePage = (dir) => {
           <p v-if="moo.sale_price">{{ moo.sale_price }} was <span>{{ moo.regular_price }}</span></p>
         </div>
       </div>
-      {{ data }}
+       {{ data3 }} 
       <!-- {{ error  }} -->
       <!-- {{  pending }} -->
     </div>
