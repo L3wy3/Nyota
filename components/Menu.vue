@@ -17,9 +17,9 @@
         <li>
             <NuxtLink to="/woocommerce" style="color:#FFF;"className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">E-Commerce</NuxtLink>
         </li>
-        <li>
+        <!-- <li>
             <NuxtLink to="/bollywood" style="color:#FFF;">Bollywood</NuxtLink>
-        </li>
+        </li> -->
         <li>
           <NuxtLink to="/3d" style="color:#FFF;">3d</NuxtLink>
         </li>
