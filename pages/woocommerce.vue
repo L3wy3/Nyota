@@ -1,6 +1,6 @@
 <script setup>
 const config = useRuntimeConfig();
-const count = ref(9);
+const count = ref(8);
 const page = ref(1);
 // let perPage = ref(count);
 // const url5 = `https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef&per_page=3&page=${count}`;
@@ -53,8 +53,9 @@ const { data3 } = await useAsyncData('item', () => $fetch(cats))
 </script>
 <style>
 #products-container {
-  max-width: 1600px;
+  max-width: 1400px;
   padding: 20px;
+  margin: 0 auto;
 }
 .product-container {
   background-color: #dbe2ff;
