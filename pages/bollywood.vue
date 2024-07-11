@@ -48,8 +48,6 @@ const moo = data2.data
             <img :src="config.public.imgBaseUrl+'/'+moo?.profile_path" style="max-width: 300px;"></img>
             <!-- {{ data }} -->
             <div v-for="moo in data2.data">
-                wtf
-                {{moo}}
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 self-center gap-x-10 gap-y-10 mb-10">
             <!-- <div v-for="actor in moo"> -->

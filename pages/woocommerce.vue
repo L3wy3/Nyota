@@ -28,10 +28,7 @@ const { data, pending } = await useAsyncData(
 );
 // const { data, pending, error, refresh } = useFetch(`https://reqres.in/api/users?delay=1`, query: {param1: `page=${counter}`)
 
-function tagScrape(text) {
-      let regex = /(<([^>]+)>)/ig;
-      return text.replace(regex, "");
-}
+
 
 const loadPost = (int) => {
   count.value = int;
@@ -141,12 +138,7 @@ button {
           <!-- <pre>pending: {{ pending }}</pre> -->
         </div>
         <div class="product-container" v-for="moo in data">
-          <div class="product-images" :style="{'background-image': `url(${moo.images[0].src})`}"></div>
-          <h3>{{moo.name}}</h3>
-          <p>{{ tagScrape(moo.short_description) }}</p>
-          <p v-if="!moo.sale_price">{{ moo.regular_price }}</p>
-          <p v-if="moo.sale_price" class="sale-token">Sale</p>
-          <p v-if="moo.sale_price">{{ moo.sale_price }} was <span>{{ moo.regular_price }}</span></p>
+          <ProductCard :product="moo"/>
         </div>
       </div>
        {{ data3 }} 
