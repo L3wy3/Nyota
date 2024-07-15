@@ -1,148 +1,86 @@
 <script setup>
-const config = useRuntimeConfig();
-const count = ref(8);
-const page = ref(1);
-// let perPage = ref(count);
-// const url5 = `https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef&per_page=3&page=${count}`;
 
 const cats = `https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products/categories/?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef`;
-// const {data2} = await useAsyncData(
-//   'test',
-//   () =>
-//     $fetch(cats, {})
-// );
+import { useWindowScroll } from '@vueuse/core'
+const { x, y } = useWindowScroll()
+console.log(x.value) // read current x scroll value
+y.value = 100 // scroll y to 100
 
-
-const { data, pending } = await useAsyncData(
-  'test',
+const { data: woof } = await useAsyncData(
+  'test1',
   () =>
-    $fetch(`https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef`, {
-      params: {
-        per_page: count.value,
-        page: page.value,
-      },
-    }),
-  {
-    watch: [count, page],
-  }
+    $fetch(cats)
 );
-// const { data, pending, error, refresh } = useFetch(`https://reqres.in/api/users?delay=1`, query: {param1: `page=${counter}`)
 
-
-
-const loadPost = (int) => {
-  count.value = int;
-  // console.log("refreshing "+count)
-  console.log(count)
-}
-
-const changePage = (dir) => {
-  page.value += dir;
-  // console.log("refreshing "+count)
-  console.log(count)
-}
-
-
-// const { data3 } = await useFetch('https://nyota-woo.co.uk/wordpress/wp-json/wc/v3/products/categories/?consumer_key=ck_3d18a89e470755860a070ddf2713861fe546a984&consumer_secret=cs_0d8c0ed68a74756f663971686d3fd4c0f3e3deef');
-
-const { data3 } = await useAsyncData('item', () => $fetch(cats))
-// setInterval(refreshing, 1000);
+console.log(woof);
+// woof.sort((a, b) => b.menu_order - a.menu_order);
 </script>
 <style>
-#products-container {
-  max-width: 1400px;
-  padding: 20px;
-  margin: 0 auto;
+body {
+  font-size: 16px;
 }
-.product-container {
-  background-color: #dbe2ff;
+@media only screen and (min-width: 720px) {
+  body {
+    font-size: 18px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  body {
+    font-size: 24px;
+  }
+}
+.categories-container {
+  display: inline-flex;
+    flex-wrap: wrap;
+    max-width: 1600px;
+    padding: 40px;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-start;
+    grid-gap: 12px;
+}
+.category-mid {
+  background-color: red;
+  min-width: 300px;
+  width: 50%;
+  max-width: 550px;
+}
+.category-outer:empty {
+  display: none;
+}
+.category-inner img {
   width: 100%;
-  max-width: 300px;
-  position: relative;
-  border: 5px solid rgb(75 97 126);
-  border-radius: 11px;
-  margin: 5px;
-  padding: 10px;
-}
-.product-container h3 {
-  text-align: center;
-  font-weight: 600;
-  color: #180d64;
-}
-.product-container p span {
-  text-decoration: line-through;
-}
-.product-images {
+  height: 230px;
   background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 150px;
-  border-radius: 5px;
 }
-
-@keyframes rotate {
-  0%   {background-image: linear-gradient(0deg, black, #0900ff);}
-  50% {background-image: linear-gradient(180deg,  #0900ff, black);}
-  100%   {background-image: linear-gradient(360deg, black, #0900ff);}
-}
-.sale-token {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  height: 60px;
-  width: 60px;
+.category-inner h3 {
   text-align: center;
-  border-radius: 0 12px 0 200%;
-  z-index: 2;
-  padding: 9px;
-  /* background-image: linear-gradient(292deg, black, #0900ff); */
-  color: white;
-  font-weight: 900;
-  animation: rotate 5s infinite;
-}
-button {
-  display: block;
-  margin: 20px;
-  padding: 10px 20px;
-  text-align: center;
-  border: 2px solid black;
-  text-transform: capitalize;
-  border-radius: 20px;
-}
-.p-butt {
-  float: left;
-}
-.n-butt {
-  float: right;
+    font-size: 1.5em;
+    color: #FFF;
 }
 </style>
 <template>
-    <div id="products-container">
+   <div class="parralax">
+      <div style="background-color: blue; width:100%; height: 50px; position: fixed" :style="{'top': x.value }"></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  <div :style="{'top': x.value }">
+
+{{ x }}|{{ y }}
+</div>
+    <div>
       <h1 style="text-align: center; font-size: 30px;">Barry's bikes</h1>
       <p style="text-align: center; font-size:12px;">This is a headless wordpress/woo-commerce app, all the CMS is dealt with externally and the data is pulled through here to be displayed without having to use wordpress on the client side</p>
-      <div style="    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;">
-        <div style="width: 100%">
-          <!-- <button @click.prevent="loadPost(5)">5</button>
-          <button @click.prevent="loadPost(10)">10</button>
-          <button @click.prevent="loadPost(15)">15</button>
-          <button @click.prevent="loadPost(20)">20</button> -->
-          <button class="p-butt" v-if="page > 1" @click.prevent="changePage(-1)">prev page</button>
-          <button class="n-butt"@click.prevent="changePage(1)">next page</button>
-          <!-- {{ data.length }} -->
-          <!-- <pre>pending: {{ pending }}</pre> -->
-        </div>
-        <div class="product-container" v-for="moo in data">
-          <ProductCard :product="moo"/>
+    </div>
+    <div class="categories-container">
+      <div class="category-outer" v-for="quack in woof">
+        <div class="category-mid"v-if="quack.parent == 0 && quack.name != 'Uncategorised'">
+        <CategoryCard :category="quack"/>
         </div>
       </div>
-       {{ data3 }} 
-      <!-- {{ error  }} -->
-      <!-- {{  pending }} -->
     </div>
 </template>
