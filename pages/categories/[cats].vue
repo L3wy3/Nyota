@@ -43,7 +43,7 @@ const changePage = (dir) => {
   // console.log("refreshing "+count)
   console.log(count)
 }
-const { category } = defineProps(['category'])
+const { category, links } = defineProps([['category'],['links']])
 </script>
 <style>
 #products-container {
@@ -64,7 +64,7 @@ const { category } = defineProps(['category'])
 .product-container h3 {
   text-align: center;
   font-weight: 600;
-  color: #180d64;
+  color: #00015f;
 }
 .product-container p span {
   text-decoration: line-through;
@@ -115,15 +115,37 @@ button {
 .n-butt {
   float: right;
 }
-
-.category-outer {
-  background-color: red;
+.category-mid {
+  min-width: 300px;
+  width: 50%;
+  max-width: 550px;
 }
-.category-outer img {
-  height: 130px;
+.category-outer:empty {
+  display: none;
+}
+.category-outer {
+  max-width: min-content;
+  border-radius: 12px;
+  border: 1px solid #97979782;
+  background-color: #ffffff;
+}
+.category-inner img {
+  width: 100%;
+  height: 230px;
+  background-size: cover;
+}
+.category-inner h3 {
+  text-align: center;
+    font-size: 1.5em;
+    color: #00015f
+}
+.category-inner img {
+  border-radius: 16px;
+  padding: 8px;
 }
 </style>
 <template>
+<ShopMenu :links="woof"/>
  <div class="categories-container">
       <div class="category-outer" v-for="quack in woof">
         <CategoryCard :category="quack"/>

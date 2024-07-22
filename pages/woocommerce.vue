@@ -12,12 +12,14 @@ const { data: woof } = await useAsyncData(
     $fetch(cats)
 );
 
-console.log(woof);
-// woof.sort((a, b) => b.menu_order - a.menu_order);
+
+
+ 
 </script>
 <style>
 body {
   font-size: 16px;
+  background-color: #FCFCFC;
 }
 @media only screen and (min-width: 720px) {
   body {
@@ -32,54 +34,33 @@ body {
 .categories-container {
   display: inline-flex;
     flex-wrap: wrap;
-    max-width: 1600px;
     padding: 40px;
     justify-content: center;
     align-content: center;
     align-items: flex-start;
     grid-gap: 12px;
+    width: 100%;
+    margin: 0 auto;
 }
-.category-mid {
-  background-color: red;
-  min-width: 300px;
-  width: 50%;
-  max-width: 550px;
+
+.content-container {
+  max-width: 1400px;
+  margin: 0 auto;
 }
-.category-outer:empty {
-  display: none;
-}
-.category-inner img {
-  width: 100%;
-  height: 230px;
-  background-size: cover;
-}
-.category-inner h3 {
-  text-align: center;
-    font-size: 1.5em;
-    color: #FFF;
-}
+
 </style>
 <template>
-   <div class="parralax">
-      <div style="background-color: blue; width:100%; height: 50px; position: fixed" :style="{'top': x.value }"></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  <div :style="{'top': x.value }">
-
-{{ x }}|{{ y }}
-</div>
-    <div>
-      <h1 style="text-align: center; font-size: 30px;">Barry's bikes</h1>
-      <p style="text-align: center; font-size:12px;">This is a headless wordpress/woo-commerce app, all the CMS is dealt with externally and the data is pulled through here to be displayed without having to use wordpress on the client side</p>
-    </div>
-    <div class="categories-container">
-      <div class="category-outer" v-for="quack in woof">
-        <div class="category-mid"v-if="quack.parent == 0 && quack.name != 'Uncategorised'">
-        <CategoryCard :category="quack"/>
+  <ShopMenu :links="woof"/>
+    <div class="content-container">
+      <div>
+        <h1 style="text-align: center; font-size: 30px;">Barry's bikes</h1>
+        <p style="text-align: center; font-size:12px;">This is a headless wordpress/woo-commerce app, all the CMS is dealt with externally and the data is pulled through here to be displayed without having to use wordpress on the client side</p>
+      </div>
+      <div class="categories-container">
+        <div class="category-outer" v-for="quack in woof">
+          <div class="category-mid"v-if="quack.parent == 0 && quack.name != 'Uncategorised'">
+          <CategoryCard :category="quack" :links="woof"/>
+          </div>
         </div>
       </div>
     </div>

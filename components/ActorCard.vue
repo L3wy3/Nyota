@@ -8,7 +8,7 @@
         {{actor?.name}}
     </div>
     <div>
-        <!-- {{actor?.overview}} -->
+        {{actor?.overview}}
     </div>
 </template>
 

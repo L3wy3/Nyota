@@ -1,7 +1,8 @@
 <template>
     <div className="category-inner" v-if="category.image">
         <NuxtLink  :to="`/categories/${category.id}`">
-            <img :style="{'background-image': `url(${category.image.src})`}"/>
+            <!-- <img :style="{'background-image': `url(${category.image.src})`}"/> -->
+            <NuxtImg :src="category.image.src" />
             <h3>{{ category.name }}</h3>
             <!-- <p>{{ category.id }}</p>
             <p>{{ category.parent }}</p>

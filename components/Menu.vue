@@ -23,6 +23,9 @@
         <li>
           <NuxtLink to="/3d" style="color:#FFF;">3d</NuxtLink>
         </li>
+        <li>
+          <NuxtLink to="/wordel" style="color:#FFF;">wordel</NuxtLink>
+        </li>
       </ul>
     </div>
   </div>
