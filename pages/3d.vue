@@ -6,7 +6,7 @@ import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 import UgglyBunny from './UgglyBunny.vue';
 
 const gl = {
-  clearColor: '#F78B3D',
+  clearColor: '#F78B3D00',
   shadows: true,
   alpha: false,
   shadowMapType: BasicShadowMap,
@@ -19,8 +19,8 @@ const gl = {
   <TresCanvas v-bind="gl" style="max-width: 50%;
     height: auto !important; position: relative">
     <TresPerspectiveCamera
-    :position="[2, 2, 9]"
-    :look-at="[0, 2, 0]"
+    :position="[0, 9, 5]"
+    :look-at="[0, 0, 0]"
   />
     <OrbitControls />
     <Suspense>
