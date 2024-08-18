@@ -4,7 +4,7 @@
 <template>
     <div>
       <section class="hero"  style="background-color: black">
-        <img class="parallax_4" style="width: 100vh" src="/home/lewy/Code/Nyota-project/public/img/parralax/0.webp" alt="">
+        <img class="parallax_4" style="width: 100vh" src="./img/parralax/0.webp" alt="">
         <!-- <img class="parallax_7" src="/home/lewy/Code/Nyota-project/public/img/parralax/1.webp" alt="">
         <img class="parallax_6" src="/home/lewy/Code/Nyota-project/public/img/parralax/2.webp" alt="">
         <img class="parallax_5" src="/home/lewy/Code/Nyota-project/public/img/parralax/3.webp" alt="">
