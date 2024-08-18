@@ -1,5 +1,5 @@
 <script setup>
-import { TresCanvas } from '@tresjs/core';
+import { TresCanvas, useRenderLoop } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 
@@ -13,6 +13,7 @@ const gl = {
   outputColorSpace: SRGBColorSpace,
   toneMapping: NoToneMapping,
   windowSize: true,
+  
 }
 </script>
 <template>
@@ -22,7 +23,8 @@ const gl = {
     :position="[0, 9, 5]"
     :look-at="[0, 0, 0]"
   />
-    <OrbitControls />
+    <OrbitControls 
+    />
     <Suspense>
       <UgglyBunny />
     </Suspense>

@@ -58,6 +58,9 @@ const items = ["","","","","","","","","","","","","","","","","","","","","",""
 </template>
 
 <style>
+body {
+
+}
     .grid div {
         border: 1px solid #000;
         height: 50px;
