@@ -4,9 +4,13 @@
 <template>
     <div>
       <section class="hero"  style="background-color: black">
-        <img class="parallax_4" style="width: 100vh" src="./img/parralax/0.webp" alt="">
-        <!-- <img class="parallax_7" src="/home/lewy/Code/Nyota-project/public/img/parralax/1.webp" alt="">
-        <img class="parallax_6" src="/home/lewy/Code/Nyota-project/public/img/parralax/2.webp" alt="">
+        <h1 class="parallax_1">Nyota</h1>
+        <img class="parallax_4" style="width: 100vh" src="/img/parralax/0.webp" alt="">
+        <img style="    width: 50%;
+    object-fit: contain;
+    right: -40vw;
+    position: relative;" class="parallax_7" src="/img/parralax/1.webp" alt="">
+        <!-- <img class="parallax_6" src="/home/lewy/Code/Nyota-project/public/img/parralax/2.webp" alt="">
         <img class="parallax_5" src="/home/lewy/Code/Nyota-project/public/img/parralax/3.webp" alt="">
         <img class="parallax_4" src="/home/lewy/Code/Nyota-project/public/img/parralax/4.webp" alt="">
         <img class="parallax_3" src="/home/lewy/Code/Nyota-project/public/img/parralax/5.webp" alt="">
@@ -16,6 +20,7 @@
     <section class="content">
         <h2>Previous projects</h2>
         <p>I've been developing websites for almost a decade at this point, here are just some examples</p><br>
+        <h3>Coming soon</h3>
         <article class="gallery">
             <img src="https://assets.codepen.io/1506195/unsplash-music-0.avif" alt="guitar player at concert" />
             <img src="https://assets.codepen.io/1506195/unsplash-music-1.avif" alt="duo singing" />
@@ -27,5 +32,6 @@
             <img src="https://assets.codepen.io/1506195/unsplash-music-7.avif" alt="woman singing on stage" />
         </article>    
     </section>
+    <section style="height: 100vh"></section>
     </div>
 </template>

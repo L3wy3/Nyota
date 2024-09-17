@@ -16,6 +16,7 @@ const { links } = defineProps(['links'])
       <div v-if="link.parent == 0 && link.name != 'Uncategorised'">
         <NuxtLink :to="`/categories/${link.id}`">{{ link.name }}</NuxtLink>
         <div v-for="sublink in links">
+          {{ sublink.parent }}
           <div style="margin-left: 20px;" v-if="sublink.parent == link.id">
             <NuxtLink :to="`/categories/${sublink.id}`">{{ sublink.name }}</NuxtLink>
           </div>
