@@ -73,16 +73,16 @@ margin-inline: auto;
 
 
 .gallery {
-    --size: 100px;
-    display: grid;
-    grid-template-columns: repeat(6, var(--size));
-    grid-auto-rows: var(--size);
-    margin-bottom: var(--size);
-    place-items: start center;
-    gap: 5px;
-    margin: 0 auto;
-    width: 100%;
-    justify-content: center;
+  --size: 100px;
+  display: grid;
+  grid-template-columns: repeat(6, var(--size));
+  grid-auto-rows: 162px;
+  margin-bottom: var(--size);
+  place-items: start center;
+  gap: 10px;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
     
     &:has(:hover) img:not(:hover),
     &:has(:focus) img:not(:focus){
