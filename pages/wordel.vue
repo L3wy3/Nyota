@@ -17,7 +17,7 @@
     <div>
  </div>
     <client-only>
-        <p>{{ word }}</p>
+        <!-- <p>{{ word }}</p> -->
     </client-only>
 
 </template>
@@ -116,6 +116,25 @@ div.yellow {
 }
 div.green {
     background-color: green;
+}
+.keyboard {
+    display: flex;
+    width: 70%;
+    max-width: 100vw;
+    gap: 9px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+.key {
+    font-size: 32px;
+    border-radius: 12px;
+    border: 2px solid black;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
 }
     .grid div {
         border: 1px solid #000;
