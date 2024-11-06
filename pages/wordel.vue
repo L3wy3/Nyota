@@ -10,7 +10,7 @@
             <v-btn icon v-for="letter in alphabet" class="key" @click="setNewData(letter)">{{letter}}</v-btn>
         </div>
         <div>
-            <button @click="EnterRow">Enter</button>
+            <button @click="EnterRow" :disabled="submitCondition">Enter</button>
             <button @click="DeleteChar" class="px-4 py-2 bg-pink-500 rounded uppercase font-bold hover:bg-pink-600 duration-300">Back</button>
         </div>
     </div>
@@ -26,7 +26,10 @@ import type { ConstNode } from 'three/examples/jsm/nodes/Nodes.js';
 import words from '../assets/fives.json'
 const word = words[Math.floor(Math.random() * words.length)]
 var completedRow =0
+
+var submitCondition = true;
 var winCondition = 0
+var isWord
 const EnterRow = () => {
     if (count % 5 === 0 && count > completedRow*5) {
         for (var i = 0; i < 5; i++) {
@@ -34,6 +37,9 @@ const EnterRow = () => {
             if(letter == word[i]) {
                 winCondition++
                 items.value[i+(completedRow*5)][1] = "green"
+            } 
+            else if (letter == word[0]||letter == word[1]||letter == word[2]||letter == word[3]||letter == word[4]){
+                items.value[i+(completedRow*5)][1] = "yellow"
             }
         }
         completedRow++
@@ -41,23 +47,37 @@ const EnterRow = () => {
             console.log("Congrats you won with "+(10-completedRow)+" lives remaining")
         }
     }
-    console.log(word)
+    submitCondition = true
     return items
 }
 const setNewData = (letter: string) => {
+    // disable = false;
+    
+    // submitCondition = true;
     if (count-(completedRow*5) < 5) {
-        console.log(letter);
-        // Set(items, 0, letter)
         items.value[count][0] = letter
         count++
+        if (count-(completedRow*5) == 5) {
+            isWord = items.value[0+(completedRow*5)][0]+""+items.value[1+(completedRow*5)][0]+""+items.value[2+(completedRow*5)][0]+""+items.value[3+(completedRow*5)][0]+""+items.value[4+(completedRow*5)][0]
+            if(words.includes(isWord)){
+                submitCondition = false
+            }
+            console.log(count-(completedRow*5))
+            // return submitCondition
+        }
         return items
     }
+    
+        
+    
+
     // make your changes here...
   }
 var count = 0;
 var items = ref([["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0]]);
-const alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","m","o","p","q","r","s","t","u","v","w","x","y","z"];
+const alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 const DeleteChar = () => {
+    submitCondition = true
     if (count > completedRow*5) {
         count--;
         items.value[count][0] = "";
@@ -66,10 +86,18 @@ const DeleteChar = () => {
 }
 
 import { useMagicKeys, whenever } from '@vueuse/core'
-const { shift, v, u, e, s, v_u_e, u_s_e, current } = useMagicKeys()
+const { q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m, Backspace, current } = useMagicKeys()
 const keys = computed(() => Array.from(current))
 whenever(keys, () => {
-  console.log(keys)
+    if(keys.value[0] != "") {
+        console.log(keys.value[0])
+        if (keys.value[0] == "Backspace") {
+            DeleteChar()
+        }
+        else {
+            setNewData(keys.value[0])
+        }
+    }
 })
 </script>
 <style>
@@ -79,6 +107,9 @@ body {
 
 .container {
     margin-top: 200px;
+}
+button:disabled {
+    background-color: black;
 }
 div.yellow {
     background-color: yellow;
