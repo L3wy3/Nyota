@@ -16,15 +16,15 @@
     </div>
     <div>
  </div>
-    <client-only>
-        <!-- <p>{{ word }}</p> -->
-    </client-only>
+    <!-- <client-only>
+        <p>{{ word }}</p>
+    </client-only> -->
 
 </template>
 <script setup lang="ts">
 import type { ConstNode } from 'three/examples/jsm/nodes/Nodes.js';
 import words from '../assets/fives.json'
-const word = words[Math.floor(Math.random() * words.length)]
+var word = words[Math.floor(Math.random() * words.length)]
 var completedRow =0
 
 var submitCondition = true;
@@ -37,6 +37,7 @@ const EnterRow = () => {
             if(letter == word[i]) {
                 winCondition++
                 items.value[i+(completedRow*5)][1] = "green"
+                // alphabet[1] == "green"
             } 
             else if (letter == word[0]||letter == word[1]||letter == word[2]||letter == word[3]||letter == word[4]){
                 items.value[i+(completedRow*5)][1] = "yellow"
@@ -45,15 +46,14 @@ const EnterRow = () => {
         completedRow++
         if(winCondition === 5) {
             console.log("Congrats you won with "+(10-completedRow)+" lives remaining")
+            // word = words[Math.floor(Math.random() * words.length)]
         }
     }
     submitCondition = true
     return items
 }
 const setNewData = (letter: string) => {
-    // disable = false;
-    
-    // submitCondition = true;
+    console.log(letter)
     if (count-(completedRow*5) < 5) {
         items.value[count][0] = letter
         count++
@@ -62,8 +62,6 @@ const setNewData = (letter: string) => {
             if(words.includes(isWord)){
                 submitCondition = false
             }
-            console.log(count-(completedRow*5))
-            // return submitCondition
         }
         return items
     }
@@ -75,7 +73,9 @@ const setNewData = (letter: string) => {
   }
 var count = 0;
 var items = ref([["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0]]);
-const alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var alphabet0 = ref([["q",""],["w",""],["e",""],["r",""],["t",""],["y",""],["u",""],["i",""],["o",""],["p",""],["a",""],["s",""],["d",""],["f",""],["g",""],["h",""],["j",""],["k",""],["l",""],["z",""],["x",""],["c",""],["v",""],["b",""],["n",""],["m",""]]);
+const alphabet = ["q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"];
+
 const DeleteChar = () => {
     submitCondition = true
     if (count > completedRow*5) {
@@ -106,42 +106,70 @@ body {
 }
 
 .container {
-    margin-top: 200px;
+    display: inline-flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 button:disabled {
     background-color: black;
 }
 div.yellow {
-    background-color: yellow;
+    background-color: #b8b810;
 }
 div.green {
-    background-color: green;
+    animation: mymove 1s forwards;
+}
+button {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 2px solid black;
+    text-transform: uppercase;
+    font-weight: 900;
+    background-color: #FFF;
+}
+button:disabled {
+    background-color: #958484;
+    color: #131010;
+}
+@keyframes mymove {
+  0%   {transform: rotatey(0deg);background-color: white;}
+  50%  {transform: rotatey(90deg);background-color: white;}
+    51%  {transform: rotatey(-90deg);background-color: green;}
+  100% {transform: rotatey(0deg); background-color: green;}
+}
+body {
+    background-color: #080707;   
 }
 .keyboard {
     display: flex;
-    width: 70%;
+    width: 620px;
     max-width: 100vw;
     gap: 9px;
     flex-direction: row;
     flex-wrap: wrap;
     margin: 10px 0;
+    justify-content: center;
 }
 .key {
     font-size: 32px;
     border-radius: 12px;
-    border: 2px solid black;
+    border: 2px solid white;
     height: 50px;
     width: 50px;
     display: flex;
+    color: #FFF;
     justify-content: center;
     text-transform: uppercase;
 }
     .grid div {
-        border: 1px solid #000;
+        border: 2px solid #656565;
         height: 50px;
         width: 50px;
         font-size: 30px;
         text-align: center;
+        color: #FFF;
         text-transform: capitalize;
     }
     .grid {
@@ -157,11 +185,6 @@ div.green {
         justify-content: center;
         flex-direction: column;
         align-items: center;
-    }
-    .keyboard {
-        display: inline-grid;
-        grid-template-columns: repeat(10, 1fr);
-        gap: 3px;
     }
     .keyboard div {
         text-align: center;
