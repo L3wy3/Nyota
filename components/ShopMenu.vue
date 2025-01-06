@@ -3,7 +3,6 @@ const { links } = defineProps(['links'])
 </script>
 
 <template>
-
 <nav>
   <NuxtLink to="/woocommerce">Barry's Bikes</NuxtLink>
   <div class="burger-menu">
