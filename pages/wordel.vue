@@ -102,15 +102,18 @@ whenever(keys, () => {
 </script>
 <style>
 body {
-
+    background-color: #000;
 }
-
+nav {
+    display: none;
+}
 .container {
     display: inline-flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    background-color: #101010;
 }
 button:disabled {
     background-color: black;
@@ -140,7 +143,7 @@ button:disabled {
   100% {transform: rotatey(0deg); background-color: green;}
 }
 body {
-    background-color: #080707;   
+    
 }
 .keyboard {
     display: flex;
