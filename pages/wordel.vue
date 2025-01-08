@@ -1,6 +1,7 @@
 
 <template>
     <div class="container">
+        <p class="status">{{ status }}</p>
         <div id="grid" class="grid">
             <div v-for="item in items" :class="`${item[1] === 'green' ? 'green' : item[1] === 'yellow' ? 'yellow' : ''} ${item[2] === 'active' ? 'active' : ''}`" >
                 {{ item[0] }}
@@ -9,7 +10,13 @@
         <div class="keyboard">
             <v-btn icon v-for="letter in alphabet" :class="` key ${letter[1] === 'green' ? 'green' : letter[1] === 'yellow' ? 'yellow' : letter[1] === 'grey' ? 'grey' : ''}`" @click="setNewData(letter[0])">{{letter[0]}}</v-btn>
         </div>
-        <div>
+        <div :class="`${gameStatus === 2 ? 'show' : 'hide'}`">
+            <button @click="Restart">Next Level</button>
+        </div>
+        <div :class="`${gameStatus === 1 ? 'show' : 'hide'}`">
+            <button @click="Restart">New Game</button>
+        </div>
+        <div :class="`${gameStatus === 0 ? 'show' : 'hide'}`">
             <button @click="EnterRow" :disabled="submitCondition">Enter</button>
             <button @click="DeleteChar" class="px-4 py-2 bg-pink-500 rounded uppercase font-bold hover:bg-pink-600 duration-300">Back</button>
         </div>
@@ -26,10 +33,20 @@ import type { ConstNode } from 'three/examples/jsm/nodes/Nodes.js';
 import words from '../assets/fives.json'
 var word = words[Math.floor(Math.random() * words.length)]
 var completedRow =0
-
+var status = " "
 var submitCondition = true;
 var winCondition = 0
 var isWord
+var gameStatus = 0
+var plural = ""
+const Restart = () => {
+    word = words[Math.floor(Math.random() * words.length)]
+    console.log(word);
+    completedRow = 0
+    status = " "
+    items = ref([["",0,"active"],["",0,"active"],["",0,"active"],["",0,"active"],["",0,"active"],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0]]);
+    return
+}
 const EnterRow = () => {
     if (count % 5 === 0 && count > completedRow*5) {
         for (var i = 0; i < 5; i++) {
@@ -45,17 +62,26 @@ const EnterRow = () => {
             } else {
                 alphabet.value[alphabet0.indexOf(letter)][1] = "grey"
             }
-            items.value[i+5+(completedRow*5)][2] = "active"
+            if (completedRow < 6) {
+                items.value[i+5+(completedRow*5)][2] = "active"
+            }
             items.value[i+(completedRow*5)][2] = ""
         }
         console.log("Row: "+completedRow+" Correct letters: "+winCondition)
         completedRow++
         if(winCondition === 5) {
-            console.log("Congrats you won with "+(10-completedRow)+" lives remaining")
+            if(completedRow < 6) {
+                plural = "lives"
+            } else {
+                plural = "life"
+            }
+            status = "Congrats you won with "+(7-completedRow)+" "+plural+" remaining"
+            gameStatus = 2
             // word = words[Math.floor(Math.random() * words.length)]
         }
-        if(completedRow ===7 && winCondition < 5) {
-            console.log("Wow you suck")
+        if(completedRow === 7 && winCondition < 5) {
+            status = "The answer was "+word
+            gameStatus = 1
             // word = words[Math.floor(Math.random() * words.length)]
         }
         winCondition = 0
@@ -113,6 +139,8 @@ whenever(keys, () => {
 body {
     background-color: #000;
 }
+.hide { display: none;}
+.show { display: block;}
 #grid .active {
     border: 2px solid #FFF;
 }
@@ -124,6 +152,11 @@ nav {
 }
 .key.yellow {
     background-color:  #b8b810;
+}
+.status {
+    color: #FFF;
+    font-size: 24px;
+    margin-bottom: 12px;
 }
 .key.grey {
     background-color:  #707070;
