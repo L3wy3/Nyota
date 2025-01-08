@@ -2,12 +2,12 @@
 <template>
     <div class="container">
         <div id="grid" class="grid">
-            <div v-for="item in items" :class="`${item[1] === 'green' ? 'green' : item[1] === 'yellow' ? 'yellow' : ''}`" >
+            <div v-for="item in items" :class="`${item[1] === 'green' ? 'green' : item[1] === 'yellow' ? 'yellow' : ''} ${item[2] === 'active' ? 'active' : ''}`" >
                 {{ item[0] }}
             </div>
         </div>
         <div class="keyboard">
-            <v-btn icon v-for="letter in alphabet" class="key" @click="setNewData(letter)">{{letter}}</v-btn>
+            <v-btn icon v-for="letter in alphabet" :class="` key ${letter[1] === 'green' ? 'green' : letter[1] === 'yellow' ? 'yellow' : letter[1] === 'grey' ? 'grey' : ''}`" @click="setNewData(letter[0])">{{letter[0]}}</v-btn>
         </div>
         <div>
             <button @click="EnterRow" :disabled="submitCondition">Enter</button>
@@ -37,23 +37,33 @@ const EnterRow = () => {
             if(letter == word[i]) {
                 winCondition++
                 items.value[i+(completedRow*5)][1] = "green"
-                // alphabet[1] == "green"
+                alphabet.value[alphabet0.indexOf(letter)][1] = "green"
             } 
             else if (letter == word[0]||letter == word[1]||letter == word[2]||letter == word[3]||letter == word[4]){
                 items.value[i+(completedRow*5)][1] = "yellow"
+                alphabet.value[alphabet0.indexOf(letter)][1] = "yellow"
+            } else {
+                alphabet.value[alphabet0.indexOf(letter)][1] = "grey"
             }
+            items.value[i+5+(completedRow*5)][2] = "active"
+            items.value[i+(completedRow*5)][2] = ""
         }
+        console.log("Row: "+completedRow+" Correct letters: "+winCondition)
         completedRow++
         if(winCondition === 5) {
             console.log("Congrats you won with "+(10-completedRow)+" lives remaining")
             // word = words[Math.floor(Math.random() * words.length)]
         }
+        if(completedRow ===7 && winCondition < 5) {
+            console.log("Wow you suck")
+            // word = words[Math.floor(Math.random() * words.length)]
+        }
+        winCondition = 0
     }
     submitCondition = true
     return items
 }
 const setNewData = (letter: string) => {
-    console.log(letter)
     if (count-(completedRow*5) < 5) {
         items.value[count][0] = letter
         count++
@@ -72,9 +82,9 @@ const setNewData = (letter: string) => {
     // make your changes here...
   }
 var count = 0;
-var items = ref([["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0]]);
-var alphabet0 = ref([["q",""],["w",""],["e",""],["r",""],["t",""],["y",""],["u",""],["i",""],["o",""],["p",""],["a",""],["s",""],["d",""],["f",""],["g",""],["h",""],["j",""],["k",""],["l",""],["z",""],["x",""],["c",""],["v",""],["b",""],["n",""],["m",""]]);
-const alphabet = ["q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"];
+var items = ref([["",0,"active"],["",0,"active"],["",0,"active"],["",0,"active"],["",0,"active"],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0],["",0,0]]);
+var alphabet0 = ["q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"];
+var alphabet = ref([["q",""],["w",""],["e",""],["r",""],["t",""],["y",""],["u",""],["i",""],["o",""],["p",""],["a",""],["s",""],["d",""],["f",""],["g",""],["h",""],["j",""],["k",""],["l",""],["z",""],["x",""],["c",""],["v",""],["b",""],["n",""],["m",""]]);
 
 const DeleteChar = () => {
     submitCondition = true
@@ -90,7 +100,6 @@ const { q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m, Backspace, current 
 const keys = computed(() => Array.from(current))
 whenever(keys, () => {
     if(keys.value[0] != "") {
-        console.log(keys.value[0])
         if (keys.value[0] == "Backspace") {
             DeleteChar()
         }
@@ -104,8 +113,21 @@ whenever(keys, () => {
 body {
     background-color: #000;
 }
+#grid .active {
+    border: 2px solid #FFF;
+}
 nav {
     display: none;
+}
+.key.green {
+    background-color:  green;
+}
+.key.yellow {
+    background-color:  #b8b810;
+}
+.key.grey {
+    background-color:  #707070;
+    color: #000;
 }
 .container {
     display: inline-flex;
@@ -174,6 +196,7 @@ body {
         text-align: center;
         color: #FFF;
         text-transform: capitalize;
+        transition: all 0.2s;
     }
     .grid {
         display: inline-grid;
